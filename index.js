@@ -6,8 +6,13 @@ const url = "mongodb+srv://srikanth:srikanth@11@cluster0.khcyt.mongodb.net/clust
 const dbName = "cluster0";
 const MongoClient = mongodb.MongoClient;
 const port = process.env.PORT || 3000
+const cors = require("cors");
 
 app.use(bodyparser.json());
+
+app.use(cors({
+  origin:"*"
+}))
 
 app.get("/users", async (req, res) => {
   try {
@@ -17,10 +22,11 @@ app.get("/users", async (req, res) => {
 
     let users = await db.collection("users").find().toArray();
 
-    connection.close();
+    
     console.log(users)
 
     res.json(users);
+    connection.close();
   } catch (error) {
     console.log(error);
   }

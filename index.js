@@ -14,7 +14,7 @@ app.use(bodyparser.json());
 
 app.get("/users", async (req, res) => {
   try {
-    let connection = await MongoClient.connect(url,{ useUnifiedTopology: true });
+    let connection = await MongoClient.connect(url);
 
     let db = connection.db(dbName);
 
@@ -32,7 +32,7 @@ app.get("/users", async (req, res) => {
 
 app.post("/user", async (req, res) => {
   try {
-    let connection = await MongoClient.connect(url,{ useUnifiedTopology: true });
+    let connection = await MongoClient.connect(url);
 
     let db = connection.db(dbName);
 
@@ -51,7 +51,7 @@ app.post("/user", async (req, res) => {
 
 app.put("/user/:user_id", async (req, res) => {
   try {
-    let connection = await MongoClient.connect(url,{ useUnifiedTopology: true });
+    let connection = await MongoClient.connect(url);
 
     let db = connection.db(dbName);
 
@@ -74,7 +74,7 @@ app.put("/user/:user_id", async (req, res) => {
 
 app.delete("/user/:user_id", async (req, res) => {
   try {
-    let connection = await MongoClient.connect(url,{ useUnifiedTopology: true });
+    let connection = await MongoClient.connect(url);
 
     let db = connection.db(dbName);
 

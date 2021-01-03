@@ -5,18 +5,20 @@ const mongodb = require("mongodb");
 const url = "mongodb+srv://srikanth:srikanth@11@cluster0.khcyt.mongodb.net/cluster0?retryWrites=true&w=majority";
 const dbName = "cluster0";
 const MongoClient = mongodb.MongoClient;
+const port = process.env.PORT || 3000
 
 app.use(bodyparser.json());
 
 app.get("/users", async (req, res) => {
   try {
-    let connection = await MongoClient.connect(url,{useUnifiedTopology: true});
+    let connection = await MongoClient.connect(url);
 
     let db = connection.db(dbName);
 
     let users = await db.collection("users").find().toArray();
 
     connection.close();
+    console.log(users)
 
     res.json(users);
   } catch (error) {
@@ -26,7 +28,7 @@ app.get("/users", async (req, res) => {
 
 app.post("/user", async (req, res) => {
   try {
-    let connection = await MongoClient.connect(url,{useUnifiedTopology: true});
+    let connection = await MongoClient.connect(url);
 
     let db = connection.db(dbName);
 
@@ -45,7 +47,7 @@ app.post("/user", async (req, res) => {
 
 app.put("/user/:user_id", async (req, res) => {
   try {
-    let connection = await MongoClient.connect(url,{useUnifiedTopology: true});
+    let connection = await MongoClient.connect(url);
 
     let db = connection.db(dbName);
 
@@ -68,7 +70,7 @@ app.put("/user/:user_id", async (req, res) => {
 
 app.delete("/user/:user_id", async (req, res) => {
   try {
-    let connection = await MongoClient.connect(url,{useUnifiedTopology: true});
+    let connection = await MongoClient.connect(url);
 
     let db = connection.db(dbName);
 
@@ -86,4 +88,4 @@ app.delete("/user/:user_id", async (req, res) => {
   }
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(port);

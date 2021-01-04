@@ -19,14 +19,12 @@ app.get("/users", async (req, res) => {
     let db = connection.db(dbName);
 
     let users = await db.collection("users").find().toArray();
-
+    connection.close();
     console.log(users);
 
     res.json(users);
   } catch (error) {
     console.log(error);
-  } finally {
-    connection.close();
   }
 });
 

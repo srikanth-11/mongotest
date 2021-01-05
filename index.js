@@ -19,7 +19,7 @@ app.get("/users", async (req, res) => {
     let db = connection.db(dbName);
 
     let users = await db.collection("users").find().toArray();
-    //connection.close();
+    connection.close();
     console.log(users);
 
     res.json(users);
